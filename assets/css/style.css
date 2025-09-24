@@ -61,3 +61,11 @@ hr{border:none;border-top:1px solid var(--border);margin:20px 0}
 .buttons{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .btn-full{width:100%;justify-content:center}
 @media(max-width:700px){.buttons{grid-template-columns:1fr}}
+.btn-accent {
+  background: #6366F1;   /* Indigo accent */
+  color: #fff;
+  border: 1px solid #4f46e5;
+}
+.btn-accent:hover {
+  background: #4f46e5;
+}
