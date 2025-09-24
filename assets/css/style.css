@@ -59,9 +59,5 @@ hr{border:none;border-top:1px solid var(--border);margin:20px 0}
 .inline-icon { display: inline-flex; align-items: center; gap: 6px; }
 .inline-icon svg { position: relative; top: 1px; }
 .buttons{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-<div class="buttons" style="margin-top:12px">
-  <a class="btn btn-secondary btn-full" href="resume-tech.html">View Technical Resume Online</a>
-  <a class="btn btn-secondary btn-full" href="resume-leadership.html">View Leadership Resume Online</a>
-</div>
 .btn-full{width:100%;justify-content:center}
 @media(max-width:700px){.buttons{grid-template-columns:1fr}}
