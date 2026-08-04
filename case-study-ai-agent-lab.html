@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Distributed AI-Agent Lab Case Study | David C. Fields</title>
+  <meta name="description" content="A public-safe case study of a mixed-architecture Linux, Docker, Kubernetes, K3s, GHCR, and AI-agent technical-validation environment.">
+  <link rel="canonical" href="https://www.davidcfields.com/case-study-ai-agent-lab.html">
+  <meta property="og:title" content="Distributed AI-Agent Lab Case Study | David C. Fields">
+  <meta property="og:description" content="A public-safe case study of a mixed-architecture Linux, Docker, Kubernetes, K3s, GHCR, and AI-agent technical-validation environment.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.davidcfields.com/case-study-ai-agent-lab.html">
+  <link rel="stylesheet" href="assets/css/portfolio-pages.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="header">
+  <nav class="nav shell" aria-label="Primary navigation">
+    <a class="brand" href="index.html">David C. Fields, <span>M.S.</span></a>
+    <div class="links">
+      <a href="recruiter-brief.html">Recruiter Brief</a>
+      <a href="case-studies.html" aria-current="page">Case Studies</a>
+      <a href="resume-tech.html">Engineering Resume</a>
+      <a href="resume-leadership.html">Leadership Resume</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+<main id="main" class="shell">
+<div class="breadcrumb"><a href="index.html">Home</a> / <a href="case-studies.html">Case Studies</a> / Distributed AI-Agent Lab</div>
+<section class="hero">
+  <p class="eyebrow">Case study · Lab / technical validation</p>
+  <h1>Distributed AI-Agent Lab & Container Platform</h1>
+  <p class="lede">A heterogeneous environment combining persistent AI agents with on-demand container agents across ARM64 and AMD64/x86-64 systems, designed to make workloads repeatable, isolated, observable, updateable, and subject to human approval.</p>
+  <div class="meta"><span class="pill">Experience: Lab / technical validation</span><span class="pill">Context: Lighthouse Digital Logistix</span><span class="pill">Status: Active development</span></div>
+</section>
+
+<section class="section">
+  <div class="grid2">
+    <article class="panel"><p class="eyebrow">The design problem</p><h2>Agents needed a consistent operating model.</h2><p>Different AI-assisted tasks require different tools, persistence, resource profiles, access boundaries, and approval rules. A single long-lived workstation or unstructured set of scripts would be difficult to reproduce, scale, update, secure, and document.</p></article>
+    <article class="panel"><p class="eyebrow">The desired outcome</p><h2>Reusable environments with clear controls.</h2><p>The platform is being designed so persistent agents and short-lived task agents can run across mixed hardware architectures while keeping workspaces, configuration, logging, secrets, and human-review requirements explicit.</p></article>
+  </div>
+</section>
+
+<section class="section">
+  <div class="intro"><p class="eyebrow">Architecture</p><h2>Mixed systems, common deployment patterns.</h2></div>
+  <div class="grid3">
+    <article class="card"><h3>Compute foundation</h3><p>Ubuntu and Linux laptops, Apple Silicon systems, a multi-node Raspberry Pi 5 cluster, Docker-capable hosts, Kubernetes/K3s, and cloud-capable development environments.</p></article>
+    <article class="card"><h3>Agent model</h3><p>Persistent Hermes and OpenClaw agents for continuing work, plus dynamically provisioned or ephemeral container agents for isolated and repeatable tasks.</p></article>
+    <article class="card"><h3>Delivery model</h3><p>Reusable container images, GitHub Container Registry, version-controlled definitions, deployment workflows, persistent workspaces, and repeatable configuration.</p></article>
+    <article class="card"><h3>Operational controls</h3><p>Logging, messaging integrations, configuration management, secrets isolation, documented policies, and human-approval controls for sensitive or externally visible actions.</p></article>
+    <article class="card"><h3>Workload portability</h3><p>Patterns are designed to run consistently across ARM64 and x86-64 while allowing workloads to be isolated, recreated, scaled, updated, and retired as needs change.</p></article>
+    <article class="card"><h3>Supported work</h3><p>Infrastructure automation, software development, research, technical documentation, business administration, product development, and specialized task execution.</p></article>
+  </div>
+</section>
+
+<section class="section">
+  <div class="intro"><p class="eyebrow">Current implementation focus</p><h2>Building the operational foundation before public telemetry.</h2></div>
+  <div class="steps">
+    <article class="step"><h3>Standardized host and container baselines</h3><p>Define repeatable Linux, container, storage, networking, access, and package-management patterns across dissimilar systems.</p></article>
+    <article class="step"><h3>Persistent and ephemeral workspace models</h3><p>Separate long-running agent context from disposable task execution so state is retained only where it is intentionally required.</p></article>
+    <article class="step"><h3>Logging and observability</h3><p>Collect useful health and execution data while designing a later public status layer that exposes only sanitized aggregate metrics.</p></article>
+    <article class="step"><h3>Secrets and approval boundaries</h3><p>Keep credentials outside public artifacts and require human review for sensitive financial, customer-facing, administrative, or externally consequential actions.</p></article>
+    <article class="step"><h3>Sanitized public artifacts</h3><p>Prepare architecture documentation, deployment examples, container definitions, runbooks, policies, schemas, and workflow artifacts that demonstrate the design without exposing private systems.</p></article>
+  </div>
+</section>
+
+<section class="section">
+  <div class="grid2">
+    <article class="panel"><p class="eyebrow">What this demonstrates</p><h2>Current hands-on capability.</h2><ul class="list-clean"><li>Linux systems administration and virtualization</li><li>Docker, Kubernetes, and K3s deployment patterns</li><li>ARM64 and x86-64 workload considerations</li><li>GitHub Actions and container-registry workflows</li><li>Configuration, logging, persistent storage, and secrets isolation</li><li>Human-in-the-loop design for AI-enabled operations</li></ul></article>
+    <article class="panel"><p class="eyebrow">What this does not claim</p><h2>Clear experience boundaries.</h2><p>This is active lab, technical-validation, consulting-development, and product-development work. It is not presented as ownership of a large enterprise production Kubernetes or AI platform.</p><p>Enterprise production experience is documented separately in the infrastructure automation case study and the Engineering and Leadership resumes.</p></article>
+  </div>
+  <div class="callout warn"><strong>Security boundary:</strong> Public versions will omit hostnames, addresses, tokens, credentials, firewall rules, open ports, detailed topology, raw logs, customer information, and other attack-enabling or private data.</div>
+</section>
+</main>
+<footer class="footer"><div class="shell footer-row"><div>© 2026 David C. Fields. Professional biography, portfolio, and resumes.</div><div class="footer-links"><a href="index.html">Home</a><a href="case-studies.html">Case Studies</a><a href="index.html#contact">Contact</a></div></div></footer>
+</body>
+</html>
