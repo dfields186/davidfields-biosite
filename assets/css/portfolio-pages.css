@@ -94,3 +94,5 @@ h3{margin:0 0 10px;font-size:1.18rem}
   .step{padding-left:25px;padding-top:64px}
   .step:before{left:24px}
 }
+.links .nav-cta{padding:7px 11px;border:1px solid rgba(101,216,255,.45);border-radius:10px;color:var(--text);background:rgba(101,216,255,.08)}
+.links .nav-cta:hover{background:rgba(101,216,255,.15)}
