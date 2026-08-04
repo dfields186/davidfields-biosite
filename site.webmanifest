@@ -1,0 +1,16 @@
+{
+  "name": "David C. Fields, M.S. — Professional Portfolio",
+  "short_name": "David Fields",
+  "start_url": "/",
+  "scope": "/",
+  "display": "minimal-ui",
+  "background_color": "#07111f",
+  "theme_color": "#07111f",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
