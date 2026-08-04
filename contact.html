@@ -62,7 +62,9 @@
       <h2>Tell me what you are trying to accomplish.</h2>
       <p>Provide enough context for an informed response. Do not submit passwords, account numbers, protected health information, customer data, confidential documents, or other sensitive information.</p>
 
-      <form id="contact-form" action="https://formspree.io/f/REPLACE_WITH_FORM_ID" method="post">
+      <form id="contact-form" action="https://formspree.io/f/xvkppyzj" method="post" accept-charset="UTF-8">
+        <input type="hidden" name="_subject" value="New professional inquiry from davidcfields.com">
+        <input type="hidden" name="_next" value="https://www.davidcfields.com/contact-success.html">
         <div class="form-grid">
           <div class="field">
             <label for="name">Name</label>
@@ -176,15 +178,6 @@
   </section>
 </main>
 <footer class="footer"><div class="shell footer-row"><div>© 2026 David C. Fields. Professional biography, portfolio, and resumes.</div><div class="footer-links"><a href="index.html">Home</a><a href="recruiter-brief.html">Recruiter Brief</a><a href="case-studies.html">Case Studies</a></div></div></footer>
-<script>
-  const form = document.getElementById('contact-form');
-  const status = document.getElementById('form-status');
-  form.addEventListener('submit', function (event) {
-    if (form.action.includes('REPLACE_WITH_FORM_ID')) {
-      event.preventDefault();
-      status.textContent = 'Review version: the form layout is complete, but online submission will be activated after the Formspree endpoint is configured.';
-    }
-  });
-</script>
+
 </body>
 </html>
