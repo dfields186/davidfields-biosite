@@ -1,0 +1,37 @@
+name: One-time FAQ and navigation standardization
+
+on:
+  push:
+    branches:
+      - faq-navigation-2026
+    paths:
+      - tools/standardize_site.py
+      - .github/workflows/standardize-site.yml
+
+permissions:
+  contents: write
+
+jobs:
+  standardize:
+    if: ${{ !contains(github.event.head_commit.message, '[site-standardized]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out review branch
+        uses: actions/checkout@v4
+        with:
+          ref: faq-navigation-2026
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Update site files
+        run: python tools/standardize_site.py
+      - name: Remove one-time automation files
+        run: rm -f tools/standardize_site.py .github/workflows/standardize-site.yml
+      - name: Commit generated site changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Add FAQ and standardize site navigation [site-standardized]"
+          git push origin HEAD:faq-navigation-2026
