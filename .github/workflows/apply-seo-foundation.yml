@@ -25,10 +25,11 @@ jobs:
       - name: Validate generated site
         run: python .github/scripts/validate_site.py
 
-      - name: Remove one-time builder
+      - name: Remove one-time and unsupported workflow files
         run: |
           rm -f .github/scripts/apply_seo_foundation.py
           rm -f .github/workflows/apply-seo-foundation.yml
+          rm -f .github/workflows/site-quality.yml
 
       - name: Commit SEO foundation
         run: |
