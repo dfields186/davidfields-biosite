@@ -1,121 +1,4 @@
-from pathlib import Path
-import re
-
-ROOT = Path(__file__).resolve().parents[1]
-
-
-def page_header(current: str, homepage: bool = False) -> str:
-    def link(label: str, href: str, key: str, cta: bool = False) -> str:
-        attrs = []
-        if current == key:
-            attrs.append('aria-current="page"')
-        cls = ' class="nav-cta"' if cta else ''
-        extra = (' ' + ' '.join(attrs)) if attrs else ''
-        return f'<a{cls} href="{href}"{extra}>{label}</a>'
-
-    about = '#about' if homepage else 'index.html#about'
-    experience = '#experience' if homepage else 'index.html#experience'
-    resumes = '#resumes' if homepage else 'index.html#resumes'
-    contact = '#contact' if homepage else ('contact.html' if current == 'contact' else 'index.html#contact')
-    brand = '#home' if homepage else 'index.html'
-
-    links = ''.join([
-        link('About', about, 'about'),
-        link('Experience', experience, 'experience'),
-        link('Case Studies', 'case-studies.html', 'case-studies'),
-        link('Resumes', resumes, 'resumes'),
-        link('FAQ', 'faq.html', 'faq'),
-        link('Contact', contact, 'contact'),
-        link('Recruiter Brief', 'recruiter-brief.html', 'recruiter', cta=True),
-    ])
-    return f'''<header class="header">
-  <nav class="nav shell" aria-label="Primary navigation">
-    <a class="brand" href="{brand}">David C. Fields, <span>M.S.</span></a>
-    <div class="links">{links}</div>
-  </nav>
-</header>'''
-
-
-def page_footer(homepage: bool = False) -> str:
-    home = '#home' if homepage else 'index.html'
-    resumes = '#resumes' if homepage else 'index.html#resumes'
-    contact = '#contact' if homepage else 'index.html#contact'
-    return f'''<footer class="footer"><div class="shell footer-row"><div>© 2026 David C. Fields. Professional biography, portfolio, and resumes.</div><div class="footer-links"><a href="{home}">Home</a><a href="recruiter-brief.html">Recruiter Brief</a><a href="case-studies.html">Case Studies</a><a href="{resumes}">Resumes</a><a href="faq.html">FAQ</a><a href="{contact}">Contact</a></div></div></footer>'''
-
-
-def replace_header_footer(path: Path, current: str, homepage: bool = False) -> None:
-    text = path.read_text(encoding='utf-8')
-    text, header_count = re.subn(r'<header class="header">.*?</header>', page_header(current, homepage), text, count=1, flags=re.S)
-    if header_count != 1:
-        raise RuntimeError(f'Could not replace header in {path.name}')
-    text, footer_count = re.subn(r'<footer class="footer">.*?</footer>', page_footer(homepage), text, count=1, flags=re.S)
-    if footer_count != 1:
-        raise RuntimeError(f'Could not replace footer in {path.name}')
-    path.write_text(text, encoding='utf-8')
-
-
-def resume_bar(current_label: str) -> str:
-    links = ''.join([
-        '<a href="index.html#about">About</a>',
-        '<a href="index.html#experience">Experience</a>',
-        '<a href="case-studies.html">Case Studies</a>',
-        '<a href="index.html#resumes" aria-current="page">Resumes</a>',
-        '<a href="faq.html">FAQ</a>',
-        '<a href="index.html#contact">Contact</a>',
-        '<a class="bar-cta" href="recruiter-brief.html">Recruiter Brief</a>',
-    ])
-    return f'''<div class="bar">
-  <a class="bar-brand" href="index.html">David C. Fields, M.S.</a>
-  <nav class="bar-nav" aria-label="Primary navigation">{links}</nav>
-  <button type="button" onclick="window.print()">Print / Save PDF</button>
-  <span class="bar-page">{current_label}</span>
-</div>'''
-
-
-def update_resume(path: Path, label: str) -> None:
-    text = path.read_text(encoding='utf-8')
-    text, count = re.subn(r'<div class="bar">.*?</div>\s*<main', resume_bar(label) + '\n<main', text, count=1, flags=re.S)
-    if count != 1:
-        raise RuntimeError(f'Could not replace resume bar in {path.name}')
-    css = '''
-.bar{flex-wrap:wrap}.bar-brand{color:#fff!important;font-weight:800;text-decoration:none;white-space:nowrap}.bar-nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 13px;flex:1}.bar-nav a{font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap}.bar-nav a[aria-current="page"]{color:#fff;text-decoration:underline}.bar-nav .bar-cta{padding:6px 9px;border:1px solid rgba(157,230,255,.55);border-radius:8px}.bar-page{width:100%;text-align:center;font-size:12px;color:#c6d3e2}@media(max-width:860px){.bar{justify-content:center}.bar-brand{width:100%;text-align:center}.bar-nav{order:3;width:100%}.bar-page{order:4}}'''
-    if '.bar-nav{' not in text:
-        text = text.replace('</style>', css + '\n</style>', 1)
-    path.write_text(text, encoding='utf-8')
-
-
-shared_css = ROOT / 'assets/css/portfolio-pages.css'
-css = shared_css.read_text(encoding='utf-8')
-if '.links .nav-cta' not in css:
-    css += '''
-.links .nav-cta{padding:7px 11px;border:1px solid rgba(101,216,255,.45);border-radius:10px;color:var(--text);background:rgba(101,216,255,.08)}
-.links .nav-cta:hover{background:rgba(101,216,255,.15)}
-'''
-shared_css.write_text(css, encoding='utf-8')
-
-# Homepage uses embedded CSS.
-index = ROOT / 'index.html'
-text = index.read_text(encoding='utf-8')
-if '.links .nav-cta' not in text:
-    text = text.replace('</style>', '.links .nav-cta{padding:7px 11px;border:1px solid rgba(101,216,255,.45);border-radius:10px;color:var(--text);background:rgba(101,216,255,.08)}.links .nav-cta:hover{background:rgba(101,216,255,.15)}\n</style>', 1)
-index.write_text(text, encoding='utf-8')
-
-replace_header_footer(index, current='home', homepage=True)
-
-for filename, current in {
-    'recruiter-brief.html': 'recruiter',
-    'case-studies.html': 'case-studies',
-    'case-study-enterprise-automation.html': 'case-studies',
-    'case-study-ai-agent-lab.html': 'case-studies',
-    'contact.html': 'contact',
-    'contact-success.html': 'contact',
-}.items():
-    replace_header_footer(ROOT / filename, current=current)
-
-update_resume(ROOT / 'resume-tech.html', 'Engineering ATS Resume')
-update_resume(ROOT / 'resume-leadership.html', 'Leadership ATS Resume')
-
-faq = '''<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -135,7 +18,12 @@ faq = '''<!doctype html>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-''' + page_header('faq') + '''
+<header class="header">
+  <nav class="nav shell" aria-label="Primary navigation">
+    <a class="brand" href="index.html">David C. Fields, <span>M.S.</span></a>
+    <div class="links"><a href="index.html#about">About</a><a href="index.html#experience">Experience</a><a href="case-studies.html">Case Studies</a><a href="index.html#resumes">Resumes</a><a href="faq.html" aria-current="page">FAQ</a><a href="index.html#contact">Contact</a><a class="nav-cta" href="recruiter-brief.html">Recruiter Brief</a></div>
+  </nav>
+</header>
 <main id="main" class="shell">
   <div class="breadcrumb"><a href="index.html">Home</a> / FAQ</div>
   <section class="hero">
@@ -169,10 +57,6 @@ faq = '''<!doctype html>
     <details><summary>What is the best way to make contact?</summary><div class="faq-answer"><p>Use the <a href="index.html#contact">professional inquiry form</a> and include the role or project, work arrangement, compensation or budget when appropriate, expected timing, key requirements, and the desired next step.</p></div></details>
   </section>
 </main>
-''' + page_footer() + '''
+<footer class="footer"><div class="shell footer-row"><div>© 2026 David C. Fields. Professional biography, portfolio, and resumes.</div><div class="footer-links"><a href="index.html">Home</a><a href="recruiter-brief.html">Recruiter Brief</a><a href="case-studies.html">Case Studies</a><a href="index.html#resumes">Resumes</a><a href="faq.html">FAQ</a><a href="index.html#contact">Contact</a></div></div></footer>
 </body>
 </html>
-'''
-(ROOT / 'faq.html').write_text(faq, encoding='utf-8')
-
-print('FAQ created and navigation standardized.')
