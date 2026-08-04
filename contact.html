@@ -3,11 +3,181 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contact David C. Fields, M.S.</title>
-  <meta name="description" content="Professional contact information for David C. Fields, M.S.">
-  <link rel="canonical" href="https://www.davidcfields.com/#contact">
-  <meta http-equiv="refresh" content="0; url=index.html#contact">
-  <style>body{margin:0;display:grid;min-height:100vh;place-items:center;background:#07111f;color:#eef7ff;font:18px/1.6 system-ui,sans-serif}a{color:#65d8ff}</style>
+  <title>Contact David C. Fields, M.S. | Employment, Contract & Consulting</title>
+  <meta name="description" content="Contact David C. Fields, M.S. about senior technology employment, contract work, consulting, architecture, infrastructure, automation, cybersecurity, and collaboration.">
+  <link rel="canonical" href="https://www.davidcfields.com/contact.html">
+  <meta property="og:title" content="Contact David C. Fields, M.S.">
+  <meta property="og:description" content="Employment, contract, consulting, architecture, infrastructure, automation, cybersecurity, and collaboration inquiries.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.davidcfields.com/contact.html">
+  <link rel="stylesheet" href="assets/css/portfolio-pages.css">
+  <style>
+    .contact-layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(290px,.8fr);gap:20px;align-items:start}
+    .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+    .field{display:grid;gap:7px}.field.full{grid-column:1/-1}
+    label{font-weight:800;color:var(--text)}
+    .optional{font-size:.82rem;color:var(--muted);font-weight:500}
+    input,select,textarea{width:100%;border:1px solid var(--line);border-radius:13px;background:#091726;color:var(--text);font:inherit;padding:12px 13px;outline:none}
+    textarea{min-height:180px;resize:vertical}
+    input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(101,216,255,.12)}
+    select{color-scheme:dark}
+    .check{display:flex;gap:10px;align-items:flex-start;color:var(--muted);font-size:.93rem}
+    .check input{width:auto;margin-top:5px}
+    .form-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:20px}
+    button.btn{cursor:pointer;font:inherit}
+    .form-status{min-height:26px;margin-top:14px;color:var(--warn);font-weight:750}
+    .direct-list{display:grid;gap:14px;padding:0;margin:16px 0 0;list-style:none}
+    .direct-list a{overflow-wrap:anywhere}
+    .privacy{margin-top:18px;padding:17px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.025);color:var(--muted);font-size:.91rem}
+    .hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+    @media(max-width:900px){.contact-layout{grid-template-columns:1fr}}
+    @media(max-width:680px){.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}}
+  </style>
 </head>
-<body><p>The Contact page has moved to the <a href="index.html#contact">refreshed contact section</a>.</p></body>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="header">
+  <nav class="nav shell" aria-label="Primary navigation">
+    <a class="brand" href="index.html">David C. Fields, <span>M.S.</span></a>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="recruiter-brief.html">Recruiter Brief</a>
+      <a href="case-studies.html">Case Studies</a>
+      <a href="index.html#resumes">Resumes</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </div>
+  </nav>
+</header>
+<main id="main" class="shell">
+  <section class="hero">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Contact</div>
+    <p class="eyebrow">Professional contact</p>
+    <h1>Start a focused conversation.</h1>
+    <p class="lede">Use this form for senior technology employment, contract, contract-to-hire, consulting, architecture, infrastructure, automation, cybersecurity, technical leadership, or collaboration inquiries.</p>
+  </section>
+
+  <section class="section contact-layout">
+    <article class="panel">
+      <p class="kicker">Inquiry form</p>
+      <h2>Tell me what you are trying to accomplish.</h2>
+      <p>Provide enough context for an informed response. Do not submit passwords, account numbers, protected health information, customer data, confidential documents, or other sensitive information.</p>
+
+      <form id="contact-form" action="https://formspree.io/f/xvkppyzj" method="post" accept-charset="UTF-8">
+        <input type="hidden" name="_subject" value="New professional inquiry from davidcfields.com">
+        <input type="hidden" name="_next" value="https://www.davidcfields.com/contact-success.html">
+        <div class="form-grid">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required maxlength="120">
+          </div>
+          <div class="field">
+            <label for="organization">Company or organization <span class="optional">optional</span></label>
+            <input id="organization" name="organization" type="text" autocomplete="organization" maxlength="160">
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required maxlength="160">
+          </div>
+          <div class="field">
+            <label for="phone">Phone <span class="optional">optional</span></label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="40">
+          </div>
+          <div class="field">
+            <label for="inquiry_type">Reason for contacting</label>
+            <select id="inquiry_type" name="inquiry_type" required>
+              <option value="">Select one</option>
+              <option>Employment opportunity</option>
+              <option>Contract or contract-to-hire</option>
+              <option>Consulting engagement</option>
+              <option>Technical collaboration</option>
+              <option>Speaking, teaching, or media</option>
+              <option>Other professional inquiry</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="work_arrangement">Work arrangement <span class="optional">optional</span></label>
+            <select id="work_arrangement" name="work_arrangement">
+              <option value="">Not specified</option>
+              <option>Remote</option>
+              <option>Hybrid — Central Ohio</option>
+              <option>Onsite — Central Ohio</option>
+              <option>Travel required</option>
+              <option>Consulting / project based</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="role_project">Role, project, or discussion topic <span class="optional">optional</span></label>
+            <input id="role_project" name="role_project" type="text" maxlength="220" placeholder="Example: Director of Infrastructure, automation assessment, or architecture review">
+          </div>
+          <div class="field">
+            <label for="preferred_response">Preferred response</label>
+            <select id="preferred_response" name="preferred_response" required>
+              <option>Email</option>
+              <option>Phone</option>
+              <option>LinkedIn</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="timeline">Timing <span class="optional">optional</span></label>
+            <select id="timeline" name="timeline">
+              <option value="">Not specified</option>
+              <option>Immediate / within one week</option>
+              <option>Within two to four weeks</option>
+              <option>Within one to three months</option>
+              <option>Exploratory / future planning</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required maxlength="5000" placeholder="Include the objective, scope, location or work arrangement, important requirements, and the best next step."></textarea>
+          </div>
+          <div class="field full hp-field" aria-hidden="true">
+            <label for="website">Leave this field blank</label>
+            <input id="website" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="field full">
+            <label class="check" for="privacy_ack">
+              <input id="privacy_ack" name="privacy_acknowledgment" type="checkbox" value="Acknowledged" required>
+              <span>I understand this is a professional inquiry form and will not submit confidential, regulated, financial, authentication, customer, or health information.</span>
+            </label>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn primary" type="submit">Send professional inquiry</button>
+          <a class="btn" href="mailto:david@davidcfields.com?subject=Professional%20inquiry%20from%20davidcfields.com">Use email instead</a>
+        </div>
+        <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+      </form>
+    </article>
+
+    <aside>
+      <article class="card">
+        <p class="kicker">Direct contact</p>
+        <h3>Prefer a direct channel?</h3>
+        <ul class="direct-list">
+          <li><strong>Email</strong><br><a href="mailto:david@davidcfields.com">david@davidcfields.com</a></li>
+          <li><strong>Phone</strong><br><a href="tel:+17403340254">+1 (740) 334-0254</a></li>
+          <li><strong>LinkedIn</strong><br><a href="https://www.linkedin.com/in/david-c-fields" target="_blank" rel="noopener">linkedin.com/in/david-c-fields</a></li>
+          <li><strong>GitHub</strong><br><a href="https://github.com/davidcfields" target="_blank" rel="noopener">github.com/davidcfields</a></li>
+        </ul>
+      </article>
+      <article class="card" style="margin-top:18px">
+        <p class="kicker">Helpful context</p>
+        <h3>For the fastest useful response</h3>
+        <ul class="list-clean">
+          <li>State the role, project, or business objective.</li>
+          <li>Include compensation or budget when appropriate.</li>
+          <li>Identify remote, hybrid, onsite, and travel expectations.</li>
+          <li>Note the expected timeline and decision process.</li>
+          <li>Share a public job description or project overview when available.</li>
+        </ul>
+      </article>
+      <div class="privacy"><strong>Privacy:</strong> Information submitted through the activated form will be handled by the selected form-processing provider and delivered to David. The site does not request sensitive personal or business data.</div>
+    </aside>
+  </section>
+</main>
+<footer class="footer"><div class="shell footer-row"><div>© 2026 David C. Fields. Professional biography, portfolio, and resumes.</div><div class="footer-links"><a href="index.html">Home</a><a href="recruiter-brief.html">Recruiter Brief</a><a href="case-studies.html">Case Studies</a></div></div></footer>
+
+</body>
 </html>
