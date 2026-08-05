@@ -1,0 +1,39 @@
+name: One-time consulting services build
+
+on:
+  push:
+    branches:
+      - consulting-services-2026
+    paths:
+      - .github/workflows/apply-consulting-services.yml
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: consulting-services-2026
+
+      - name: Apply consulting services package
+        run: python .github/scripts/apply_consulting_services.py
+
+      - name: Validate generated site
+        run: python .github/scripts/validate_site.py
+
+      - name: Remove one-time builder
+        run: |
+          rm -f .github/scripts/apply_consulting_services.py
+          rm -f .github/workflows/apply-consulting-services.yml
+
+      - name: Commit consulting services package
+        run: |
+          git config user.name "David C. Fields, M.S."
+          git config user.email "david.fields@lhdl.io"
+          git add -A
+          git commit -m "Add consulting and contract services page"
+          git push origin consulting-services-2026
