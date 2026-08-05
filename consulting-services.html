@@ -1,18 +1,4 @@
-from __future__ import annotations
-
-from pathlib import Path
-
-
-def replace_once(path: str, old: str, new: str) -> None:
-    file_path = Path(path)
-    text = file_path.read_text(encoding="utf-8")
-    count = text.count(old)
-    if count != 1:
-        raise RuntimeError(f"Expected one match in {path}, found {count}: {old[:100]!r}")
-    file_path.write_text(text.replace(old, new, 1), encoding="utf-8")
-
-
-consulting_page = """<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -127,56 +113,3 @@ consulting_page = """<!doctype html>
 <footer class="footer"><div class="shell footer-row"><div>© 2026 David C. Fields. Professional biography, portfolio, resumes, and consulting information.</div><div class="footer-links"><a href="index.html">Home</a><a href="consulting-services.html">Consulting</a><a href="recruiter-brief.html">Recruiter Brief</a><a href="case-studies.html">Case Studies</a><a href="index.html#resumes">Resumes</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a></div></div></footer>
 </body>
 </html>
-"""
-
-Path("consulting-services.html").write_text(consulting_page, encoding="utf-8")
-
-replace_once(
-    "index.html",
-    '<a class="btn" href="infrastructure-automation-security-modernization.html">Primary market focus</a><a class="btn" href="case-studies.html">Review case studies</a>',
-    '<a class="btn" href="infrastructure-automation-security-modernization.html">Primary market focus</a><a class="btn" href="consulting-services.html">Consulting services</a><a class="btn" href="case-studies.html">Review case studies</a>',
-)
-
-replace_once(
-    "recruiter-brief.html",
-    '    <a class="btn primary" href="infrastructure-automation-security-modernization.html">View primary market focus</a>\n    <a class="btn" href="resume-leadership.html">Leadership resume</a>',
-    '    <a class="btn primary" href="infrastructure-automation-security-modernization.html">View primary market focus</a>\n    <a class="btn" href="consulting-services.html">Consulting services</a>\n    <a class="btn" href="resume-leadership.html">Leadership resume</a>',
-)
-
-replace_once(
-    "infrastructure-automation-security-modernization.html",
-    '    <a class="btn primary" href="recruiter-brief.html">Read recruiter brief</a>\n    <a class="btn" href="case-studies.html">Review case studies</a>',
-    '    <a class="btn primary" href="recruiter-brief.html">Read recruiter brief</a>\n    <a class="btn" href="consulting-services.html">Consulting services</a>\n    <a class="btn" href="case-studies.html">Review case studies</a>',
-)
-
-contact_card = '''      <article class="card" style="margin-top:18px">
-        <p class="kicker">Consulting and contract services</p>
-        <h3>Need a defined assessment, roadmap, or modernization engagement?</h3>
-        <p>Review the selective services available through Lighthouse Digital Logistix before submitting an inquiry.</p>
-        <div class="card-actions"><a class="btn" href="consulting-services.html">View consulting services</a></div>
-      </article>
-'''
-replace_once(
-    "contact.html",
-    '      <div class="privacy"><strong>Privacy:</strong>',
-    contact_card + '      <div class="privacy"><strong>Privacy:</strong>',
-)
-
-replace_once(
-    "sitemap.xml",
-    '  <url><loc>https://davidcfields.com/infrastructure-automation-security-modernization.html</loc><lastmod>2026-08-05</lastmod></url>\n',
-    '  <url><loc>https://davidcfields.com/infrastructure-automation-security-modernization.html</loc><lastmod>2026-08-05</lastmod></url>\n  <url><loc>https://davidcfields.com/consulting-services.html</loc><lastmod>2026-08-05</lastmod></url>\n',
-)
-replace_once(
-    "sitemap.xml",
-    '  <url><loc>https://davidcfields.com/contact.html</loc><lastmod>2026-08-04</lastmod></url>',
-    '  <url><loc>https://davidcfields.com/contact.html</loc><lastmod>2026-08-05</lastmod></url>',
-)
-
-replace_once(
-    ".github/scripts/validate_site.py",
-    '    "infrastructure-automation-security-modernization.html": "/infrastructure-automation-security-modernization.html",\n',
-    '    "infrastructure-automation-security-modernization.html": "/infrastructure-automation-security-modernization.html",\n    "consulting-services.html": "/consulting-services.html",\n',
-)
-
-print("Consulting services package applied successfully.")
