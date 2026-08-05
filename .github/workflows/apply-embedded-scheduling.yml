@@ -23,8 +23,8 @@ jobs:
           from pathlib import Path
           path = Path('.github/scripts/apply_embedded_scheduling.py')
           text = path.read_text(encoding='utf-8')
-          old = 'href=\"contact\\\\.html\"'
-          new = 'href=\"(?:contact\\\\.html|index\\\\.html#contact)\"'
+          old = 'href="contact\\.html"'
+          new = 'href="(?:contact\\.html|index\\.html#contact)"'
           if old not in text:
               raise RuntimeError('Expected contact CTA matcher not found')
           path.write_text(text.replace(old, new, 1), encoding='utf-8')
