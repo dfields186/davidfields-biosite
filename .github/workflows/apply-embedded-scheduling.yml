@@ -38,7 +38,7 @@ jobs:
         run: |
           git config user.name "David C. Fields, M.S."
           git config user.email "david.fields@lhdl.io"
-          git rm .github/workflows/apply-embedded-scheduling.yml .github/scripts/apply_embedded_scheduling.py
+          git rm -f .github/workflows/apply-embedded-scheduling.yml .github/scripts/apply_embedded_scheduling.py
           git add .
           git commit -m "Add embedded Calendly scheduling experience"
           git push origin embedded-calendly-scheduling-2026
