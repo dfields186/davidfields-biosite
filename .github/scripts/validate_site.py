@@ -12,6 +12,7 @@ INDEXABLE = {
     "recruiter-brief.html": "/recruiter-brief.html",
     "infrastructure-automation-security-modernization.html": "/infrastructure-automation-security-modernization.html",
     "consulting-services.html": "/consulting-services.html",
+    "schedule.html": "/schedule.html",
     "case-studies.html": "/case-studies.html",
     "case-study-enterprise-automation.html": "/case-study-enterprise-automation.html",
     "case-study-ai-agent-lab.html": "/case-study-ai-agent-lab.html",
@@ -89,6 +90,28 @@ for path in Path(".").glob("*.html"):
     if not re.search(r'href="consulting-services\.html"[^>]*>Consulting</a>', text):
         errors.append(f"Primary navigation missing Consulting link in {path.name}")
 
+
+for path in Path(".").glob("*.html"):
+    text = path.read_text(encoding="utf-8")
+    if 'aria-label="Primary navigation"' not in text:
+        continue
+    if not re.search(r'href="schedule\.html"[^>]*>Schedule</a>', text):
+        errors.append(f"Primary navigation missing Schedule link in {path.name}")
+
+schedule_text = Path("schedule.html").read_text(encoding="utf-8") if Path("schedule.html").exists() else ""
+for token in (
+    'class="calendly-inline-widget"',
+    'https://assets.calendly.com/assets/external/widget.js',
+    'https://calendly.com/fieldsventures',
+    'recruiter-or-hiring-manager-introduction',
+    'recruiter-or-hr-screening',
+    'formal-job-interview',
+    'technical-or-architecture-discussion',
+    'lhdl-consult',
+    '<noscript>',
+):
+    if token not in schedule_text:
+        errors.append(f"Scheduling page missing required integration token: {token}")
 
 if errors:
     print("Site quality validation failed:")
