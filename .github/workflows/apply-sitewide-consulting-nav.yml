@@ -1,0 +1,39 @@
+name: One-time site-wide Consulting navigation update
+
+on:
+  push:
+    branches:
+      - sitewide-consulting-nav-2026
+    paths:
+      - .github/workflows/apply-sitewide-consulting-nav.yml
+
+permissions:
+  contents: write
+
+jobs:
+  update-navigation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: sitewide-consulting-nav-2026
+
+      - name: Add Consulting to every primary menu
+        run: python .github/scripts/apply_sitewide_consulting_nav.py
+
+      - name: Validate site
+        run: python .github/scripts/validate_site.py
+
+      - name: Remove one-time builder
+        run: |
+          rm -f .github/scripts/apply_sitewide_consulting_nav.py
+          rm -f .github/workflows/apply-sitewide-consulting-nav.yml
+
+      - name: Commit navigation update
+        run: |
+          git config user.name "David C. Fields, M.S."
+          git config user.email "david.fields@lhdl.io"
+          git add -A
+          git commit -m "Add Consulting to site-wide navigation"
+          git push origin sitewide-consulting-nav-2026
