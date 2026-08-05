@@ -82,6 +82,14 @@ for required in ("favicon.svg", "site.webmanifest", "404.html"):
     if not Path(required).exists():
         errors.append(f"Missing {required}")
 
+for path in Path(".").glob("*.html"):
+    text = path.read_text(encoding="utf-8")
+    if 'aria-label="Primary navigation"' not in text:
+        continue
+    if not re.search(r'href="consulting-services\.html"[^>]*>Consulting</a>', text):
+        errors.append(f"Primary navigation missing Consulting link in {path.name}")
+
+
 if errors:
     print("Site quality validation failed:")
     for error in errors:
