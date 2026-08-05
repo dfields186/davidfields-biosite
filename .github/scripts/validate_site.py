@@ -11,6 +11,7 @@ INDEXABLE = {
     "index.html": "/",
     "recruiter-brief.html": "/recruiter-brief.html",
     "infrastructure-automation-security-modernization.html": "/infrastructure-automation-security-modernization.html",
+    "consulting-services.html": "/consulting-services.html",
     "case-studies.html": "/case-studies.html",
     "case-study-enterprise-automation.html": "/case-study-enterprise-automation.html",
     "case-study-ai-agent-lab.html": "/case-study-ai-agent-lab.html",
