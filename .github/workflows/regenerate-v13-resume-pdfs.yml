@@ -1,0 +1,67 @@
+name: Regenerate v1.3 Resume PDFs
+
+on:
+  push:
+    paths:
+      - '.github/workflows/regenerate-v13-resume-pdfs.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Playwright Chromium
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.49.1 >/dev/null 2>&1
+          npx playwright install --with-deps chromium
+
+      - name: Render v1.3 resume PDFs
+        run: |
+          cat > render-resumes-v13.js <<'JS'
+          const { chromium } = require('playwright');
+          const path = require('path');
+
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            for (const [html, pdf] of [
+              ['resume-tech.html', 'resumes/David-Fields-Resume-Technical.pdf'],
+              ['resume-leadership.html', 'resumes/David-Fields-Resume-Leadership.pdf']
+            ]) {
+              const page = await browser.newPage();
+              await page.goto('file://' + path.resolve(html), { waitUntil: 'load' });
+              await page.emulateMedia({ media: 'print' });
+              await page.pdf({
+                path: pdf,
+                format: 'Letter',
+                printBackground: true,
+                preferCSSPageSize: false,
+                margin: { top: '0in', right: '0in', bottom: '0in', left: '0in' }
+              });
+              await page.close();
+            }
+            await browser.close();
+          })();
+          JS
+          node render-resumes-v13.js
+          rm render-resumes-v13.js
+          file resumes/David-Fields-Resume-Technical.pdf resumes/David-Fields-Resume-Leadership.pdf
+
+      - name: Commit refreshed PDFs and remove temporary workflow
+        run: |
+          git config user.name "David C. Fields website automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add resumes/David-Fields-Resume-Technical.pdf resumes/David-Fields-Resume-Leadership.pdf
+          git rm .github/workflows/regenerate-v13-resume-pdfs.yml
+          git commit -m "Refresh public resume PDFs for v1.3"
+          git push
